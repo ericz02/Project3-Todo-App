@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom"
+
 const Navbar = () => {
 
     return (
         <div className="flex justify-between items-center p-[2rem] bg-[#5B8AC7]">
             <div className="">
-                <h1 className="text-[25px] text-neutral-300 hover:cursor-pointer">
-                    Awesome <strong>Todo</strong>
+                <h1 className="text-[25px] text-neutral-100 hover:cursor-pointer">
+                    <strong>Awesome</strong>Todo
                 </h1>
             </div>
 
