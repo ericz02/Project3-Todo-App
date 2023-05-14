@@ -5,8 +5,10 @@ const Navbar = () => {
         <div className="flex justify-between items-center p-[2rem] bg-[#5B8AC7]">
             <div className="">
                 <h1 className="text-[25px] text-neutral-100 hover:cursor-pointer">
-                    
-                    <strong>Awesome</strong>Todo
+
+                   {/* <Link to="/"> */}
+                   <strong>Awesome</strong>Todo
+                    {/* </Link>  */}
                 </h1>
             </div>
 
