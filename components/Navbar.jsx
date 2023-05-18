@@ -1,3 +1,4 @@
+import Link from "next/link"
 
 const Navbar = () => {
 
@@ -11,8 +12,13 @@ const Navbar = () => {
             </div>
 
             <div className="flex gap-8">
-                <li className="text-neutral-100 hover:text-blue-300 hover:cursor-pointer">Login</li>
-                <li className="text-neutral-100 hover:text-blue-300 hover:cursor-pointer">Register</li>
+                <Link href={"/login"} >
+                    <li className="text-neutral-100 hover:text-blue-300 hover:cursor-pointer">Login</li>
+                </Link>
+
+                <Link href={"/register"}>
+                    <li className="text-neutral-100 hover:text-blue-300 hover:cursor-pointer">Register</li>
+                </Link>
             </div>
             
         </div>  

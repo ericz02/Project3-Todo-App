@@ -17,7 +17,7 @@ const HomePage = () => {
             
             </h1>
 
-            <Link href="/Login">
+            <Link href="/login">
                 <button className="absolute top-3/4 left-1/2 transform -translate-x-1/2 
                 -translate-y-1/ z-10 bg-text-white bg-gradient-to-r from-cyan-500 to-blue-500
                 hover:bg-gradient-to-bl focus:ring-2 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800
