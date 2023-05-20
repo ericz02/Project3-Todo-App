@@ -10,8 +10,6 @@ const Register = () => {
     const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Here you can handle the form submission, e.g., send data to an API
-
     // Reset form fields
     setName('');
     setEmail('');
@@ -24,45 +22,45 @@ const Register = () => {
             <h2 className="text-2xl font-bold mb-6">Create Account</h2>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                Name
+                    Name
                 </label>
                 <input
-                className="w-full px-3 py-2 border border-gray-400 rounded"
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-400 rounded"
+                    type="text"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 />
             </div>
             <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                Email
+                    Email
                 </label>
                 <input
-                className="w-full px-3 py-2 border border-gray-400 rounded"
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-400 rounded"
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
             </div>
             <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                Password
+                <label className="block text-gray-700 text-sm font-bold mb-2" 
+                    htmlFor="password">
+                    Password
                 </label>
                 <input
-                className="w-full px-3 py-2 border border-gray-400 rounded"
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-400 rounded"
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
             <button
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="w-full bg-[#5B8AC7] hover:bg-[#719ed9] text-white font-bold py-2 px-4 rounded mt-5"
                 type="submit"
-                onClick={handleSubmit}
-            >
+                onClick={handleSubmit}>
                 Create Account
             </button>
             </form>
