@@ -1,7 +1,18 @@
 "use client"
 
+import Link from "next/link"
+
 const Login = () => {
     return <>
+
+        {/* Make sure to delete this eric */}
+        <Link href="/todo" >
+            <button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                Temporary button, links to TodoList page bc supabase isn't setup
+            </button>
+        </Link>
+        {/* Make sure to delete this eric */}
+        
         <section className="h-screen">
                     <div className="container h-full px-6 py-24">
                         <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
