@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useReducer } from "react";
 import { registerUser } from "../utils/data.js";
@@ -39,7 +38,6 @@ const Register = () => {
   const register = async (e) => {
     dispatch({ type: "loading", loading: true });
     e.preventDefault();
-    console.log(initialState);
 
     const response = await registerUser(email, password, name, slug);
     dispatch({ type: "response", response });
@@ -53,6 +51,25 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center h-[610px]">
+      {response && (
+        <div
+          className={`${
+            response.success
+              ? "bg-green-200 border-2 border-green-800 text-green-800"
+              : "bg-red-200 border-2 border-red-800 text-red-800"
+          } py-2 px-5 my-10 text-center`}
+        >
+          <span className="font-bold">
+            {response.success
+              ? `Success ${response.message}`
+              : `Failure: ${
+                  response.error
+                    ? response.error.message
+                    : "An unknown error occurred"
+                }`}
+          </span>
+        </div>
+      )}
       <form className="w-1/3 p-6 bg-white rounded shadow" onSubmit={register}>
         <h2 className="text-2xl font-bold mb-6">Create Account</h2>
         <div className="mb-4">
