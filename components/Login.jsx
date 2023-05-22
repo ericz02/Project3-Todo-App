@@ -45,6 +45,8 @@ const Login = () => {
       setTimeout(() => {
         router.replace("/todo");
       }, 3000);
+    } else {
+      alert("Incorrect credentials")
     }
   };
   return (

@@ -1,9 +1,14 @@
+"use client"
+
 import Link from "next/link"
+import { useState } from "react"
 
 const Navbar = () => {
 
+    const [user, setUser] = useState(null)
+    
     return (
-        <div className="flex justify-between items-center p-[2rem] bg-[#5B8AC7]">
+        <nav className="flex justify-between items-center p-[2rem] bg-[#5B8AC7]">
             <div className="">
                 <h1 className="text-[25px] text-neutral-100 hover:cursor-pointer">
                     <Link href={"/"}>
@@ -12,17 +17,20 @@ const Navbar = () => {
                 </h1>
             </div>
 
-            <div className="flex gap-8">
+            <ol className="flex gap-8">
                 <Link href={"/login"} >
-                    <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">Login</li>
+                    <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
+                        {/* {user ? `Welcome, ${user.name}` : 'Login'} */}
+                        Login
+                    </li>
                 </Link>
 
                 <Link href={"/register"}>
                     <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">Register</li>
                 </Link>
-            </div>
+            </ol>
             
-        </div>  
+        </nav>  
     )
 }
 
