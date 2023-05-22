@@ -129,7 +129,7 @@ const Register = () => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="password"
           >
-            slug
+            Slug
           </label>
           <input
             className="w-full px-3 py-2 border border-gray-400 rounded"
@@ -142,7 +142,7 @@ const Register = () => {
           />
         </div>
         <button
-          className="w-full bg-[#5B8AC7] hover:bg-[#37639D] text-white font-bold py-2 px-4 rounded mt-5"
+          className="w-full bg-[#648FC6] hover:bg-[#6D9AD5] text-white font-bold py-2 px-4 rounded mt-5"
           type="submit"
         >
           Create Account
