@@ -1,50 +1,58 @@
 import supabase from "./supabase";
 
-const getCurrentUser = async () => {
-  // grab the session from supabase (which handles all authentication)
-  const session = await supabase.auth.getSession();
-  // if a user property exists in the session.data.session object
-  if (session?.data?.session?.user) {
-    //grab from the meta table we created for the current logged
-    // in user, and attach it to the user object under the key
-    // barge meta, this is so we can access for the current user's
-    // name and slug
-    const { data: bargeMeta, error } = await supabase
-      .from("profile")
-      .select("*")
-      .eq("user_id", session.data.session.user.id)
-      .single();
 
-    if (error) {
+const getUserBySlug = async (slug) => {
+  const {data, error} = await supabase
+    .from("profile")
+    .select("user_id")
+    .eq("slug", slug)
+    .limit(1)
+    .single();
+    if(error){
+      return {
+        success: false,
+        error
+      }
+    }
+
+    return {
+      success: true,
+      data
+    }
+    
+}
+const getTodos = async (userId) => {
+  const { data, error } = await supabase
+      .from('todos')
+      .select('*')
+      .eq('user_id', userId);
+
+  if (error) {
+      console.error('Error fetching todos:', error);
+  }
+
+  return data;
+}
+const getCurrentUser = async () => {
+  // debugger;
+  const session = await supabase.auth.getSession();
+  console.log(session);
+  if(session?.data?.session?.user) {
+    const { data: bargeMeta, error } = await supabase
+    .from("profile")
+    .select("*")
+    .eq("user_id", session.data.session.user.id)
+    .single();
+
+    if(error) {
       return {
         success: false,
         error,
-      };
-    }
-
-    // here we take the user from the session.data.session
-    // object and attach to it a property bargeMeta
-    // that holds the name and slug (and some other info
-    // that is not important)
-    const { data: socialLinks } = await getSocialLinks(
-      session.data.session.user.id
-    );
-    if (socialLinks?.error) {
-      return socialLinks;
-    }
-
-    const { data: linkLinks } = await getLinksLinks(
-      session.data.session.user.id
-    );
-    if (linkLinks?.error) {
-      return socialLinks;
+      }
     }
 
     const user = {
-      ...session.data.session.user,
-      bargeMeta,
-      socialLinks,
-      linkLinks,
+      ...session.data.session.user,     
     };
 
     return {
@@ -52,11 +60,11 @@ const getCurrentUser = async () => {
       data: user,
     };
   }
-  return {
-    success: true,
-    data: null,
-  };
-};
+    return {
+      success: true,
+      data: null,
+    }
+}
 /**
  * Log in a user
  * @param {*} email
@@ -106,6 +114,28 @@ const loginUser = async (email, password) => {
     },
   };
 };
+
+const getLatestUsers = async (num = 5) => {
+  const { data, error } = await supabase
+    .from("profile")
+    .select("name, slug")
+    .order("created_at", {ascending: false})
+    .limit(num);
+
+    if(error){
+      return {
+        success: false,
+        error
+      }
+    }
+
+    return {
+      success: true,
+      data
+    }
+
+
+}
 // register a user//
 /**
  * Register a user by passing in an email, password, name and slug
@@ -172,4 +202,4 @@ const registerUser = async (email, password, name, slug) => {
     };
   };
 
-export { registerUser, loginUser, getCurrentUser };
+export { registerUser, loginUser, getCurrentUser,getLatestUsers, getUserBySlug };
