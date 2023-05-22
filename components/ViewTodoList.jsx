@@ -1,18 +1,18 @@
+"use client"
 
-const ViewTodoList = ({ todos }) => {
+import { useState } from 'react';
+import TodoList from './TodoList';
+import ViewTodoList from './ViewTodoList';
+
+const App = () => {
+  const [todos, setTodos] = useState([]);
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Todo List</h1>
-
-      <ul className="space-y-2">
-        {todos.map((todo, index) => (
-          <li key={index} className="flex items-center">
-            <span>{todo}</span>
-          </li>
-        ))}
-      </ul>
+    <div>
+      <TodoList todos={todos} setTodos={setTodos} />
+      <ViewTodoList todos={todos} />
     </div>
   );
 };
 
-export default ViewTodoList;
+export default App;

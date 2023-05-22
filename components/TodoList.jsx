@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
+import Link from "next/link"
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -90,7 +91,11 @@ const TodoList = () => {
         ))}
       </ul>
 
-      <button className='bg-[red]'>view to do</button>
+        <Link href="/viewlist">
+            <button className='bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded flex justify-center items-center'>
+                view to do
+            </button>
+        </Link>
     </div>
   );
 };
