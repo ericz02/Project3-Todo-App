@@ -6,49 +6,56 @@ import { useRouter } from "next/navigation";
 //import useUser from "csc-start/hooks/useUser";
 
 const Login = () => {
-  const router = useRouter();
 
+  
+  const router = useRouter();
+  
   function reducer(state, action) {
     switch (action.type) {
       case "email":
-      case "password":
-        return { ...state, [action.type]: action.value };
-      case "loading":
-        return { ...state, loading: action.value };
-      case "response":
-        return { ...state, response: action.value };
-    }
+        case "password":
+          return { ...state, [action.type]: action.value };
+          case "loading":
+            return { ...state, loading: action.value };
+            case "response":
+              return { ...state, response: action.value };
+            }
+            
+            throw Error("Unknown action." + action.type);
+          }
+          
+          const initialState = {
+            email: "",
+            password: "",
+            response: "",
+            loading: false,
+          };
+          
+          const [state, dispatch] = useReducer(reducer, initialState);
+          const { email, password, response, loading } = state;
+          
+          const login = async (e) => {
+            dispatch({ type: "loading", value: true });
+            dispatch({ type: "response", value: null });
+            e.preventDefault();
+            
+            const response = await loginUser(email, password);
+            
+            dispatch({ type: "response", value: response });
+            dispatch({ type: "loading", value: false });
+            if (!!response?.success) {
+              setTimeout(() => {
+                router.replace("/todo");
+              }, 3000);
+            } else {
+              alert("Incorrect credentials")
+            }
+          };
 
-    throw Error("Unknown action." + action.type);
-  }
+          const handleAlert = () => {
+            alert("Just for aesthethic purposes");
+          }
 
-  const initialState = {
-    email: "",
-    password: "",
-    response: "",
-    loading: false,
-  };
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { email, password, response, loading } = state;
-
-  const login = async (e) => {
-    dispatch({ type: "loading", value: true });
-    dispatch({ type: "response", value: null });
-    e.preventDefault();
-
-    const response = await loginUser(email, password);
-
-    dispatch({ type: "response", value: response });
-    dispatch({ type: "loading", value: false });
-    if (!!response?.success) {
-      setTimeout(() => {
-        router.replace("/todo");
-      }, 3000);
-    } else {
-      alert("Incorrect credentials")
-    }
-  };
   return (
     <>
       <section className="h-screen">
@@ -58,7 +65,7 @@ const Login = () => {
               <img
                 src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                 className="w-full"
-              />
+                />
             </div>
 
             <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
@@ -131,6 +138,7 @@ const Login = () => {
                 <a
                   className="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
                   style={{ backgroundColor: "#3b5998" }}
+                  onClick={handleAlert}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -146,6 +154,7 @@ const Login = () => {
                 <a
                   className="mb-3 flex w-full items-center justify-center rounded bg-info px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]"
                   style={{ backgroundColor: "#55acee" }}
+                  onClick={handleAlert}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
