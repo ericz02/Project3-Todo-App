@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import useUser from "../hooks/useUser"
+
 
 const Navbar = () => {
 
