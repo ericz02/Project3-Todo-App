@@ -39,8 +39,9 @@ const Register = () => {
   const register = async (e) => {
     dispatch({ type: "loading", loading: true });
     e.preventDefault();
+    console.log(initialState);
 
-    const response = await registerUser(name, email, password, name);
+    const response = await registerUser(email, password, name, slug);
     dispatch({ type: "response", response });
     dispatch({ type: "loading", loading: false });
     if (response?.success) {
