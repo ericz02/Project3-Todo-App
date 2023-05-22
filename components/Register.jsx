@@ -11,8 +11,8 @@ const Register = () => {
     switch (action.type) {
       case "email":
       case "name":
-      case "password":
       case "slug":
+      case "password":
         return { ...state, [action.type]: action.value };
       case "loading":
         return { ...state, loading: action.loading };
@@ -42,6 +42,7 @@ const Register = () => {
     const response = await registerUser(email, password, name, slug);
     dispatch({ type: "response", response });
     dispatch({ type: "loading", loading: false });
+    console.log(state)
     if (response?.success) {
       setTimeout(() => {
         router.push("/login");
@@ -120,6 +121,23 @@ const Register = () => {
             value={password}
             onChange={(e) => {
               dispatch({ type: "password", value: e.target.value });
+            }}
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="password"
+          >
+            slug
+          </label>
+          <input
+            className="w-full px-3 py-2 border border-gray-400 rounded"
+            type="slug"
+            id="slug"
+            value={slug}
+            onChange={(e) => {
+              dispatch({ type: "slug", value: e.target.value });
             }}
           />
         </div>

@@ -116,55 +116,60 @@ const loginUser = async (email, password) => {
  * @returns plain old javascript object with success, message and optionally, the rest of the addMetaResponse.data object
  */
 const registerUser = async (email, password, name, slug) => {
-  const { data, error } = await supabase
+  const { data: registerData, error: registerError } = await supabase
     .from("profile")
     .select("*")
     .eq("slug", slug);
-  if (error) {
-    return {
-      success: false,
-      message: error.message,
-    };
-  }
-  if (data.length > 0) {
-    return {
-      success: false,
-      message: "User slug already exists",
-    };
-  }
-
-  const authResponse = await supabase.auth.signUp({
-    email,
-    password,
-  });
-
-  if (authResponse.error) {
-    return {
-      success: false,
-      message: authResponse.error.message,
-    };
-  }
-
-  if (authResponse.data.user) {
-    const addMetaResponse = await supabase
-      .from("profile")
-      .insert([{ user_id: authResponse.data.user.id, name, slug }]);
-
-    if (addMetaResponse.error) {
+    if (registerError) {
       return {
         success: false,
-        message: addMetaResponse.error.message,
+        message: error.message,
       };
     }
+    if (registerData.length > 0) {
+      return {
+        success: false,
+        error: registerError,
+      };
+    }
+  
+    const authResponse = await supabase.auth.signUp({
+      email,
+      password,
+    });
+  
+    if (authResponse.error) {
+      return {
+        success: false,
+        error: authResponse.error,
+      };
+    }
+  
+    if (authResponse.data.user) {
+      const addMetaResponse = await supabase
+        .from("profile")
+        .insert([{ user_id: authResponse.data.user.id, name, slug }]);
+  
+      if (addMetaResponse.error) {
+        return {
+          success: false,
+          error: addMetaResponse.error,
+        };
+      }
+      return {
+        success: true,
+        message:
+          "Registration successful, please wait a few moments to be taken to the login page",
+        ...addMetaResponse.data,
+      };
+    }
+  
     return {
-      success: true,
-      ...addMetaResponse.data,
+      success: false,
+      error: {
+        message: "An unknown error has occurred",
+      },
     };
-  }
-
-  return {
-    success: false,
-    message: "An unknown error has occurred",
   };
-};
+
 export { registerUser, loginUser, getCurrentUser };
