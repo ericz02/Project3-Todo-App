@@ -91,7 +91,7 @@ const TodoList = () => {
 
             {showLists && (
                 <div>
-                    <h2 className="text-2xl font-bold mb-4">To-Do List</h2>
+                    <h2 className="text-2xl font-bold mb-4 text-[#5B8AC7]">My List</h2>
                     <ul>
                     {todos.map((todo, index) => (
                         <li key={index} className="mb-2">
