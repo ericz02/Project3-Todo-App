@@ -43,7 +43,7 @@ const Login = () => {
     dispatch({ type: "loading", value: false });
     if (!!response?.success) {
       setTimeout(() => {
-        router.replace("/profile");
+        router.replace("/todo");
       }, 3000);
     }
   };
