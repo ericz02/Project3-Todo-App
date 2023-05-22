@@ -14,11 +14,11 @@ const Navbar = () => {
 
             <div className="flex gap-8">
                 <Link href={"/login"} >
-                    <li className="text-neutral-100 hover:text-blue-300 hover:cursor-pointer">Login</li>
+                    <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">Login</li>
                 </Link>
 
                 <Link href={"/register"}>
-                    <li className="text-neutral-100 hover:text-blue-300 hover:cursor-pointer">Register</li>
+                    <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">Register</li>
                 </Link>
             </div>
             
