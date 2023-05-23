@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import {addNewTodos,getTodos } from '../utils/data'
+import { addNewTodos, getTodos } from '../utils/data'
 import useUser from '../hooks/useUser.js'
 import useUserMustBeLogged from '../hooks/userUserMustBeLogged'
 
@@ -48,14 +48,13 @@ const TodoList = () => {
     };
 
     const handleToggleLists = () => {
-        setShowLists(true);
+        setShowLists(!showLists);
     };
 
     return (
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-3xl font-bold mb-4">To-Do List</h1>
             <div className="flex mb-8">
-
                 <input
                     type="text"
                     value={newTodo}
@@ -69,24 +68,23 @@ const TodoList = () => {
                 >
                     Add
                 </button>
-
             </div>
 
             {todos.length > 0 && !showLists && (
                 <ul>
                     {todos.map((todo, index) => (
-                    <li
-                        key={index}
-                        className="flex items-center mb-10 bg-gray-100 rounded p-4"
-                    >
-                        <span className="flex-grow">{todo}</span>
-                        <button
-                            onClick={() => handleRemoveTodo(index)}
-                            className="text-red-500 hover:text-red-600 focus:outline-none"
+                        <li
+                            key={index}
+                            className="flex items-center mb-10 bg-gray-100 rounded p-4"
                         >
-                            Delete
-                        </button>
-                    </li>
+                            <span className="flex-grow">{todo}</span>
+                            <button
+                                onClick={() => handleRemoveTodo(index)}
+                                className="text-red-500 hover:text-red-600 focus:outline-none"
+                            >
+                                Delete
+                            </button>
+                        </li>
                     ))}
                 </ul>
             )}
@@ -94,10 +92,10 @@ const TodoList = () => {
             {!showLists && (
                 <div className="flex justify-center">
                     <button
-                    onClick={handleToggleLists}
-                    className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 mt rounded"
+                        onClick={handleToggleLists}
+                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 mt rounded"
                     >
-                    View Lists
+                        View Lists
                     </button>
                 </div>
             )}
@@ -105,13 +103,17 @@ const TodoList = () => {
             {showLists && (
                 <div>
                     <h2 className="text-2xl font-bold mb-4 text-[#5B8AC7]">My List</h2>
-                    <ul>
-                    {todos.map((todo, index) => (
-                        <li key={index} className="mb-2">
-                            {todo}
-                        </li>
-                    ))}
-                    </ul>
+                    {todos.length > 0 ? (
+                        <ul>
+                            {todos.map((todo, index) => (
+                                <li key={index} className="mb-2">
+                                    {todo}
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p>No lists found.</p>
+                    )}
                 </div>
             )}
         </div>
