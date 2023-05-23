@@ -20,7 +20,7 @@ const Navbar = () => {
       <ol className="flex gap-8">
         {user ? (
           <>
-            <Link href={"/profile"}>
+            <Link href={"/todo"}>
                 <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
                     Profile
                 </li>
