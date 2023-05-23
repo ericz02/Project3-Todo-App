@@ -3,6 +3,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import TodoList from '../components/TodoList';
+
 
 const HomePage = () => {
   return (
@@ -32,8 +34,13 @@ const HomePage = () => {
           Get Started
         </button>
       </Link>
+
+      <div className="absolute top-4/5 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <TodoList />
+      </div>
     </div>
   );
 };
+
 
 export default HomePage;
