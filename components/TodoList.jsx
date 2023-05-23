@@ -16,6 +16,7 @@ const TodoList = () => {
     useEffect(() => {
         const fetchTodos = async () => {
             const data = await getTodos(user.id);
+           // console.log(data)
             if (data) {
                 setTodos(data);
             } else {

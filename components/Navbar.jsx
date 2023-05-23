@@ -26,7 +26,7 @@ const Navbar = () => {
                 </li>
             </Link>
 
-            <Link href={"/login"}>
+            <Link href={"/logout"}>
                 <li
                 className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
                 Logout

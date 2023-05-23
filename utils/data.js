@@ -43,18 +43,31 @@ const addNewTodos = async(user_id, body, ) =>{
 
 
 
+// const getTodoAndUserName = async (userId) => {
+//   const { data, error } = await supabase
+//     .from('Todo')
+//     .select('body, profile:name') // select body from Todo and name from profile
+//     .eq('user_id', userId)
+    
 
+//   if (error) {
+//       console.error('Error fetching todo and user name:', error);
+//   }
+
+//   return data;
+// }
 const getTodos = async (userId) => {
-  const { data, error } = await supabase
-      .from('todos')
-      .select('*')
-      .eq('user_id', userId);
+  
+const { data: Todo, error } = await supabase
+  .from('Todo')
+  .select('body')
+
 
   if (error) {
       console.error('Error fetching todos:', error);
   }
 
-  return data;
+  return {Todo};
 }
 const getCurrentUser = async () => {
   // debugger;
@@ -224,5 +237,9 @@ const registerUser = async (email, password, name, slug) => {
       },
     };
   };
+  const logoutUser = async () => {
+    const { error } = await supabase.auth.signOut();
+    return { success: !error, error };
+  };
 
-export { registerUser, loginUser, getCurrentUser,getLatestUsers, getUserBySlug, addNewTodos,getTodos };
+export { registerUser, loginUser, getCurrentUser,getLatestUsers, getUserBySlug, addNewTodos,getTodos,logoutUser };
