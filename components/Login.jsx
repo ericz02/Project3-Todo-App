@@ -3,11 +3,11 @@
 import { loginUser } from "@/utils/data";
 import { useReducer } from "react";
 import { useRouter } from "next/navigation";
-import { useUserMustbeLogged } from '../hooks/userUserMustBeLogged'
+
 //import useUser from "csc-start/hooks/useUser";
 
 const Login = () => {
-  useUserMustbeLogged(user, "in", "/login");
+ 
   
   const router = useRouter();
   
