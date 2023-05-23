@@ -1,31 +1,55 @@
 "use client"
-import { useRouter } from "next/navigation";
-import useUser from '../hooks/useUser';
 
-const Navbar  = () => {
-    const { user, loading } = useUser();
-    const router = useRouter();
-    
-    if (loading) return <p>Loading...</p>;
+import Link from "next/link";
+import { useState } from "react";
+import useUser from "../hooks/useUser";
 
-    return (
-        <div className="flex justify-between mt-5">
-            {
-                user ? (
-                    <>
-                        <a onClick={() => router.replace('/profile')}>Profile</a>
-                        <a onClick={() => router.replace('/logout')}>Logout</a>
-                    </>
-                ) : ( 
-                    // User is not logged in
-                    <>
-                        <a onClick={() => router.replace('/login')}>Login</a>
-                        <a onClick={() => router.replace('/register')}>Register</a>
-                    </>
-                )
-            }
-        </div>
-    )
-}
+const Navbar = () => {
+  const { user, logout } = useUser();
 
-export default Navbar
+  return (
+    <nav className="flex justify-between items-center p-[2rem] bg-[#5B8AC7]">
+      <div className="">
+        <h1 className="text-[25px] text-neutral-100 hover:cursor-pointer">
+          <Link href={"/"}>
+            <strong>Awesome</strong>Todo
+          </Link>
+        </h1>
+      </div>
+
+      <ol className="flex gap-8">
+        {user ? (
+          <>
+            <Link href={"/profile"}>
+                <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
+                    Profile
+                </li>
+            </Link>
+
+            <Link href={"/login"}>
+                <li
+                className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
+                Logout
+                </li>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link href={"/login"}>
+              <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
+                Login
+              </li>
+            </Link>
+            <Link href={"/register"}>
+              <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
+                Register
+              </li>
+            </Link>
+          </>
+        )}
+      </ol>
+    </nav>
+  );
+};
+
+export default Navbar;
