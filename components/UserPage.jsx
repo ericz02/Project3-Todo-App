@@ -9,17 +9,15 @@ import { usePathname } from "next/navigation";
 const UserPage = () => {
   const { user } = useUser();
   // console.log(user);
-  
+
   console.log(user);
 
   return (
     <div className="h-screen mt-[150px] overflow-auto">
-      
-        <h1 className="text-8xl text-center text-shadow text-secondary">
-          User Page
-        </h1>
-        </div>
-      
+      <h1 className="text-8xl text-center text-shadow text-secondary">
+        User Page
+      </h1>
+    </div>
   );
 };
 

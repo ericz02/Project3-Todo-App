@@ -42,7 +42,7 @@ const Register = () => {
     const response = await registerUser(email, password, name, slug);
     dispatch({ type: "response", response });
     dispatch({ type: "loading", loading: false });
-    console.log(state)
+    console.log(state);
     if (response?.success) {
       setTimeout(() => {
         router.push("/login");

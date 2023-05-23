@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const Logout = () => {
   const [error, setError] = useState(undefined);
   const router = useRouter();
-  
+
   useEffect(() => {
     const innerLogout = async () => {
       const { success, error } = await logoutUser();

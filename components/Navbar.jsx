@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -21,16 +21,15 @@ const Navbar = () => {
         {user ? (
           <>
             <Link href={"/todo"}>
-                <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
-                    Profile
-                </li>
+              <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
+                Profile
+              </li>
             </Link>
 
             <Link href={"/logout"}>
-                <li
-                className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
+              <li className="text-neutral-100 hover:text-[#37639D] hover:cursor-pointer">
                 Logout
-                </li>
+              </li>
             </Link>
           </>
         ) : (
