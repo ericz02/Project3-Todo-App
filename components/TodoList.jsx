@@ -6,7 +6,7 @@ import useUser from '../hooks/useUser.js'
 import useUserMustBeLogged from '../hooks/userUserMustBeLogged'
 
 const TodoList = () => {
-    const {user} = useUser()
+    const user = useUser()
     const [todos, setTodos] = useState([]);
     const [newTodo, setNewTodo] = useState('');
     const [showLists, setShowLists] = useState(false);
