@@ -1,31 +1,44 @@
 "use client"
 
 import { useState, useEffect } from 'react';
+import {addNewTodos,getTodos } from '../utils/data'
+import useUser from '../hooks/useUser.js'
+import useUserMustBeLogged from '../hooks/userUserMustBeLogged'
 
 const TodoList = () => {
+    const {user} = useUser()
     const [todos, setTodos] = useState([]);
     const [newTodo, setNewTodo] = useState('');
     const [showLists, setShowLists] = useState(false);
 
-    useEffect(() => {
-        const storedTodos = localStorage.getItem('todos');
-        if (storedTodos) {
-          setTodos(JSON.parse(storedTodos));
-        }
-    }, []);
+    useUserMustBeLogged(user, "in", "/login");
 
     useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(todos));
-      }, [todos]);
+        const fetchTodos = async () => {
+            const data = await getTodos(user.id);
+            if (data) {
+                setTodos(data);
+            } else {
+                console.error('Error fetching todos');
+            }
+        }
+
+        fetchTodos();
+    }, [user]);
 
     const handleInputChange = (e) => {
         setNewTodo(e.target.value);
     };
 
-    const handleAddTodo = () => {
+    const addTodo = async () => {
         if (newTodo.trim() !== '') {
-            setTodos([...todos, newTodo]);
-            setNewTodo('');
+            const addedTodo = await addNewTodos(user.id, newTodo);
+            if (addedTodo.success) {
+                setTodos([...todos, newTodo]);
+                setNewTodo('');
+            } else {
+                console.error('Error adding new todo:', addedTodo.error);
+            }
         }
     };
 
@@ -51,7 +64,7 @@ const TodoList = () => {
                     className="rounded-l px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
-                    onClick={handleAddTodo}
+                    onClick={addTodo}
                     className="bg-[#5B8AC7] hover:bg-[#37639D] text-white font-bold py-2 px-4 rounded-r"
                 >
                     Add

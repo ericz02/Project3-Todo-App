@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 const UserPage = () => {
   const { user } = useUser();
   // console.log(user);
-  useUserMustBeLogged(user, "in", "/login");
+  
   console.log(user);
 
   return (

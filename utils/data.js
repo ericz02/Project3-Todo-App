@@ -21,6 +21,29 @@ const getUserBySlug = async (slug) => {
     }
     
 }
+
+const addNewTodos = async(user_id, body, ) =>{
+  const addResponse = await supabase.from("Todo").insert({
+    body,user_id
+  })
+  if (addResponse.error) {
+    return {
+      success: false,
+      error: addResponse.error,
+    };
+  }
+
+  return {
+    success: true,
+    message: "added",
+    data: addResponse.data,
+  };
+
+}
+
+
+
+
 const getTodos = async (userId) => {
   const { data, error } = await supabase
       .from('todos')
@@ -202,4 +225,4 @@ const registerUser = async (email, password, name, slug) => {
     };
   };
 
-export { registerUser, loginUser, getCurrentUser,getLatestUsers, getUserBySlug };
+export { registerUser, loginUser, getCurrentUser,getLatestUsers, getUserBySlug, addNewTodos,getTodos };
