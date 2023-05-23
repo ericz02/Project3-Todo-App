@@ -42,7 +42,7 @@ const addNewTodos = async (user_id, body) => {
 // const getTodoAndUserName = async (userId) => {
 //   const { data, error } = await supabase
 //     .from('Todo')
-//     .select('body, profile:name') // select body from Todo and name from profile
+//     .select('body, profile:name') 
 //     .eq('user_id', userId)
 
 //   if (error) {
@@ -53,13 +53,15 @@ const addNewTodos = async (user_id, body) => {
 // }
 const getTodos = async (userId) => {
   const { data: Todo, error } = await supabase.from("Todo").select("body");
-
   if (error) {
     console.error("Error fetching todos:", error);
+  
+    return [];
   }
 
-  return { Todo };
+  return Todo;
 };
+
 const getCurrentUser = async () => {
   // debugger;
   const session = await supabase.auth.getSession();

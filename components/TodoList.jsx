@@ -49,7 +49,7 @@ const TodoList = () => {
   };
 
   const handleToggleLists = () => {
-    setShowLists(!showLists);
+    setShowLists(true);
   };
 
   return (
@@ -73,20 +73,21 @@ const TodoList = () => {
 
       {todos.length > 0 && !showLists && (
         <ul>
-          {todos.map((todo, index) => (
-            <li
-              key={index}
-              className="flex items-center mb-10 bg-gray-100 rounded p-4"
-            >
-              <span className="flex-grow">{todo}</span>
-              <button
-                onClick={() => handleRemoveTodo(index)}
-                className="text-red-500 hover:text-red-600 focus:outline-none"
-              >
-                Delete
-              </button>
-            </li>
-          ))}
+         {todos.map((todo, index) => (
+  <li
+    key={index}
+    className="flex items-center mb-10 bg-gray-100 rounded p-4"
+  >
+    <span className="flex-grow">{todo.body}</span>
+    <button
+      onClick={() => handleRemoveTodo(index)}
+      className="text-red-500 hover:text-red-600 focus:outline-none"
+    >
+      Delete
+    </button>
+  </li>
+))}
+
         </ul>
       )}
 
@@ -106,11 +107,11 @@ const TodoList = () => {
           <h2 className="text-2xl font-bold mb-4 text-[#5B8AC7]">My List</h2>
           {todos.length > 0 ? (
             <ul>
-              {todos.map((todo, index) => (
-                <li key={index} className="mb-2">
-                  {todo}
-                </li>
-              ))}
+             {todos.map((todo, index) => (
+             <li key={index} className="mb-2">
+                  {todo.body}
+             </li>
+            ))}
             </ul>
           ) : (
             <p>No lists found.</p>
